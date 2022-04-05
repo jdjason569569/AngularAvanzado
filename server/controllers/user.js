@@ -1,6 +1,9 @@
 const { UserModel } = require('../models/user');
 const { encrypt, compare } = require('../utils/managerPassword');
 const { tokenSign } = require('../utils/managerJwt');
+const fs = require('fs');
+const path = require('path');
+const { log } = require('console');
 
 
 const prueba = async(req, res) => {
@@ -80,7 +83,6 @@ const updateUser = async(req, res) => {
 const uploadImage = async(req, res) => {
     const { id } = req.params;
     const fileName = 'no Subido....';
-
     if (req.files) {
         const file_path = req.files.image.path;
         const file_split = file_path.split('/');
@@ -92,6 +94,11 @@ const uploadImage = async(req, res) => {
             const data = await UserModel.findByIdAndUpdate(id, { image: file_name });
             if (data) {
                 res.send({ data });
+            } else {
+                res.status(401).send({
+                    message: 'No existe usuario'
+                });
+                return;
             }
         } else {
             res.status(401).send({
@@ -101,4 +108,22 @@ const uploadImage = async(req, res) => {
     }
 }
 
-module.exports = { prueba, saveUser, login, updateUser, uploadImage };
+const getImageFile = (req, res) => {
+    const { imageFile } = req.params;
+    const pathFile = './uploads/users/' + imageFile;
+
+    fs.readFile(pathFile, (err, data) => {
+        if (data) {
+            res.sendFile(path.resolve(pathFile));
+        } else {
+            res.status(401).send({
+                message: 'La imagen no existe'
+            });
+        }
+    })
+
+
+
+}
+
+module.exports = { prueba, saveUser, login, updateUser, uploadImage, getImageFile };
