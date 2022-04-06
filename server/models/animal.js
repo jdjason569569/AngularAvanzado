@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const AnimalSchema = new mongoose.Schema({
     name: {
@@ -18,4 +19,5 @@ const AnimalSchema = new mongoose.Schema({
         ref: 'users'
     }
 });
-module.exports = mongoose.model('animals', AnimalSchema);
+const AnimalModel = mongoose.model('animals', AnimalSchema);
+module.exports = { AnimalModel };

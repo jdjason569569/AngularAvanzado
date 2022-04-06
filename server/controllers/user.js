@@ -8,7 +8,7 @@ const { log } = require('console');
 
 const prueba = async(req, res) => {
     try {
-        res.send({ msg: "prueba" });
+        res.send({ msg: "prueba", user: req.user });
     } catch (error) {
         console.log(error);
     }
@@ -120,10 +120,21 @@ const getImageFile = (req, res) => {
                 message: 'La imagen no existe'
             });
         }
-    })
+    });
 
 
 
 }
 
-module.exports = { prueba, saveUser, login, updateUser, uploadImage, getImageFile };
+const getKeepers = async(req, res) => {
+    const userResult = await UserModel.find({ role: 'role_admin' }).exec();
+    if (!userResult) {
+        res.status(404).send({
+            message: 'No hay cuidadores'
+        });
+    } else {
+        res.status(200).send({ userResult });
+    }
+}
+
+module.exports = { prueba, saveUser, login, updateUser, uploadImage, getImageFile, getKeepers };

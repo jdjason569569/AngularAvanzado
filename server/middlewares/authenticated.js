@@ -20,6 +20,7 @@ const authMiddleware = async(req, res, next) => {
             } else {
                 const user = await UserModel.findById(dataToken._id);
                 req.user = user;
+                console.log('autenticate', req.user);
                 next();
             }
         }
