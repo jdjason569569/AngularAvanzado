@@ -1,0 +1,23 @@
+<div class="col-md-6">
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label>Nombre</label>
+            <input type="text" class="form-control" name="name" placeholder="Nombre" [(ngModel)]="user.name" required>
+        </div>
+        <div class="mb-3">
+            <label>Apellidos</label>
+            <input type="text" class="form-control" name="surname" placeholder="Apellidos" [(ngModel)]="user.surname" required>
+        </div>
+        <div class="mb-3">
+            <label>Email</label>
+            <input type="email" class="form-control" name="email" placeholder="Email" [(ngModel)]="user.email" required>
+        </div>
+        <div class="mb-3">
+            <label>Contraseña</label>
+            <input type="password" class="form-control" name="password" placeholder="Contraseña" [(ngModel)]="user.password" required>
+        </div>
+        <input type="submit" value="Guardar" class="btn btn-primary">
+        <a *ngIf="isRegister" routerLink="/login" class="ml-5">Ir login</a>
+        <input type="submit" value="PruebaHeaders" class="btn btn-danger">
+    </form>
+</div>

@@ -12,6 +12,9 @@ import { KeeperComponent } from './components/keeper/keeper.component';
 import { FormsModule } from '@angular/forms';
 import { ModuloEmailModule } from './moduloEmail/modulo-email.module';
 import { AdminModule } from './admin/admin.module';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,14 +24,17 @@ import { AdminModule } from './admin/admin.module';
     HomeComponent,
     AnimalsComponent,
     ContactComponent,
-    KeeperComponent
+    KeeperComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ModuloEmailModule,
-    AdminModule
+    AdminModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

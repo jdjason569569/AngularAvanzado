@@ -18,6 +18,29 @@
                 <a class="nav-link" routerLink="/contacto">Contacto</a>
             </li>
         </ul>
+        <ul *ngIf="!isToken" class="navbar-nav ml-auto">
+            <li>
+                <a>
+                    <button class="btn btn-danger m-1" routerLink="/registro">
+                        Registro
+                      </button>
+                </a>
+            </li>
+            <li>
+                <button class="btn btn-primary m-1" routerLink="/login">
+                        Login
+                      </button>
+            </li>
+        </ul>
+        <ul *ngIf="isToken" class="navbar-nav ml-auto">
+            <li>
+                {{user.name}}
+                <button class="btn btn-primary m-1" (click)="logOut()" routerLink="/login">
+                LogOut
+              </button>
+            </li>
+
+        </ul>
     </div>
 </nav>
 
