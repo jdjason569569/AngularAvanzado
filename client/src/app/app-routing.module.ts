@@ -7,6 +7,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { KeeperComponent } from './components/keeper/keeper.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -20,7 +21,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
 
   {path: 'admin-panel',  //PARA CARGAR RUTAS HIJAS en modo lazyload
-  loadChildren: () => import('./admin/admin.module').then(module => module.AdminModule)},
+  loadChildren: () => import('./admin/admin.module').then(module => module.AdminModule), canActivate: [RoleGuard], data:{expectedRole: 'role_admin'}},
 
   {path: '**', component: HomeComponent}
 

@@ -39,6 +39,11 @@
                 LogOut
               </button>
             </li>
+            <li *ngIf="isAdmin">
+                <button class="btn btn-success m-1" routerLink="/admin-panel">
+                    panel de administracion
+                  </button>
+            </li>
 
         </ul>
     </div>

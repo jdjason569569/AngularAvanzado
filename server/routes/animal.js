@@ -7,7 +7,7 @@ const md_upload = multipart({ uploadDir: './uploads/animals' });
 const { isAdmin } = require('../middlewares/isAdmin');
 
 router.post('/animal', [authMiddleware], saveAnimal);
-router.get('/animals', isAdmin, getAnimals);
+router.get('/animals', [authMiddleware, isAdmin], getAnimals);
 router.get('/animal/:id', getAnimal);
 router.put('/animal/:id', updateAnimal);
 router.post('/uploadImageAnimal/:id', [md_upload], uploadImage);

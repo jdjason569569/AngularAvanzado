@@ -21,18 +21,18 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(){
-    this.userService.prueba().subscribe((response)=>{
-       console.log(response);
-     });
-    // if(this.user.name != ''){
-    //   this.userService.register(this.user).subscribe((response:any)=>{      
-    //     this.isRegister = false;
-    //     if(response.data){
-    //        this.isRegister = true;
-    //        this.user = new User('','','','','','user_role','');
-    //     }
-    //    });
-    // }
+    // this.userService.prueba().subscribe((response)=>{
+    //    console.log(response);
+    //  });
+     if(this.user.name != ''){
+       this.userService.register(this.user).subscribe((response:any)=>{      
+         this.isRegister = false;
+         if(response.data){
+            this.isRegister = true;
+            this.user = new User('','','','','','user_role','');
+         }
+        });
+     }
     
   }
 

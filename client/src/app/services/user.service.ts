@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {GLOBAL} from './global';
 import { User } from '../../models/user';
-import { BehaviorSubject } from 'rxjs';
-import { Observable } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ import { Observable } from 'rxjs';
 export class UserService {
   url!: string;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { 
     this.url = GLOBAL.url;
   }
 
@@ -57,5 +56,13 @@ export class UserService {
 
   getUser() {
     return  localStorage.getItem('user');
+  }
+
+  isAuth(){
+    const token: any = localStorage.getItem('token');
+    if(this.jwtHelper.isTokenExpired(token) || !token){
+      return false;
+    }
+    return true;
   }
 }

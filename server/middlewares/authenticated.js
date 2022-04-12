@@ -4,6 +4,7 @@ const { verifyToken } = require('../utils/managerJwt');
 
 const authMiddleware = async(req, res, next) => {
     try {
+        //console.log('token', req.headers.authorization)
         if (!req.headers.authorization) {
             res.status(401).send({
                 message: 'No hay token en la peticion'

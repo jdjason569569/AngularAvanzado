@@ -12,6 +12,7 @@ export class AppComponent implements OnInit ,DoCheck{
   title = 'Zoologico';
   isToken: boolean = false;
   user!: User;
+  isAdmin: boolean = false;
 
   constructor(private userService:UserService){
     
@@ -25,6 +26,11 @@ export class AppComponent implements OnInit ,DoCheck{
     if(this.userService.getToken()){
       this.isToken = true;
       this.user = JSON.parse(this.userService.getUser() || '{}');
+      console.log(this.user.role);
+      
+      if(this.user.role != 'role_user'){
+        this.isAdmin = true
+      }
     }else{
       this.isToken = false;
     }
@@ -33,5 +39,6 @@ export class AppComponent implements OnInit ,DoCheck{
   logOut(){
     localStorage.clear();
     this.isToken = false;
+    this.isAdmin = false;
   }
 }

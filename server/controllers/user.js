@@ -8,7 +8,9 @@ const { log } = require('console');
 
 const prueba = async(req, res) => {
     try {
-        res.send({ msg: "prueba", user: req.user });
+        const body = req.body;
+        console.log('body en prueba -> ', body);
+        res.send({ msg: "prueba david sarria", user: req.user });
     } catch (error) {
         console.log(error);
     }
@@ -18,6 +20,7 @@ const saveUser = async(req, res) => {
     try {
         const password = await encrypt(req.body.password);
         const body = {...req.body, password };
+        console.log('body -> ', body);
         const data = await UserModel.create(body);
         res.send({ data });
     } catch (error) {
